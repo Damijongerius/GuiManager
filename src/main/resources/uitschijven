@@ -1,0 +1,17 @@
+GuiManager
+
+list of things that can be done
+OnEnable (every time plugin activates)
+-lijst met inventories
+-lijst met statische items
+
+OnEnable Logic
+if list already contains item it wont add
+
+OnInstantiate (this will run when the plugin will run for the first time)
+-lijst met inventories
+-lijst met statische items
+
+GuiCreator
+
+GuiCreator(size,name,)

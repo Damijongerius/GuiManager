@@ -1,0 +1,32 @@
+package com.dami.guimanager.Gui;
+
+import org.bukkit.Bukkit;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
+public class GuiCreator{
+    private Inventory inventory;
+
+    public GuiCreator(String name, int size){
+        inventory = Bukkit.createInventory(null,size,name);
+    }
+
+    public void SetItem(int slot, ItemStack item){
+        inventory.setItem(slot,item);
+    }
+
+    public void setItems(int begin, int end, ItemStack item){
+        int apply = begin < end ? 1 : -1;
+        for(int i = begin; i <= end; i += apply){
+
+        }
+    }
+    public void setItems(int[] slots, ItemStack item){
+
+    }
+
+    public Inventory BuildInventory(){
+
+        return null;
+    }
+}

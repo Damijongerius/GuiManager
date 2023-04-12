@@ -1,0 +1,4 @@
+name: GuiManager
+version: '${project.version}'
+main: com.dami.guimanager.GuiManager
+api-version: 1.19
