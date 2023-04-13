@@ -9,5 +9,5 @@ public interface GuiBehavior {
 
     public Inventory updateInventory(Inventory inv);
 
-    public Inventory BuildInventory(String inv);
+    public Inventory buildInventory(String prefix, String inv);
 }

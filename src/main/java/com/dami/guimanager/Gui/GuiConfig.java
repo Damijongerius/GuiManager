@@ -7,7 +7,4 @@ public class GuiConfig {
     private int size = 9;
     private String name = "customGui";
 
-    private boolean usePlayerInventory = false;
-    private boolean cancelAllClicks = false;
-
 }

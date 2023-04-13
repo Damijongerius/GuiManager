@@ -42,7 +42,7 @@ public class Gui {
                 return set.getValue();
             }
         }
-        Inventory inv = behavior.BuildInventory(prefix + " | " + inventory);
+        Inventory inv = behavior.buildInventory(prefix, inventory);
         inventories.put(inventory,inv);
         return inv;
     }

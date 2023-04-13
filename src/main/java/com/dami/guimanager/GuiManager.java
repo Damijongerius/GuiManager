@@ -5,6 +5,7 @@ import com.dami.guimanager.Gui.GuiBehavior;
 import com.dami.guimanager.Item.Items;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
@@ -13,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
 
 
-public final class GuiManager extends JavaPlugin{
+public final class GuiManager extends JavaPlugin implements Listener {
     private static GuiManager instance;
     private Items items = new Items();
 
@@ -44,8 +45,14 @@ public final class GuiManager extends JavaPlugin{
         Items.staticItems.put(name,items);
     }
 
-    public void openGuiFor(Player p, String prefix, String ExtendingInventory){
-
+    public boolean openGuiFor(Player p, String prefix, String extendingInventory){
+        for(Gui gui : inventories){
+            if(prefix.equals(gui.getPrefix())){
+                gui.addPlayer(p,extendingInventory);
+                return true;
+            }
+        }
+        return false;
     }
 
     public static GuiManager getInstance(){
