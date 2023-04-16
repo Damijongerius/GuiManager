@@ -7,11 +7,11 @@ import org.bukkit.inventory.ItemStack;
 public class GuiCreator{
     private Inventory inventory;
 
-    public GuiCreator(String name, int size){
-        inventory = Bukkit.createInventory(null,size,name);
+    public GuiCreator(String prefix, String name, int size){
+        inventory = Bukkit.createInventory(null,size,prefix +  " | " +  name);
     }
 
-    public void SetItem(int slot, ItemStack item){
+    public void setItem(int slot, ItemStack item){
         inventory.setItem(slot,item);
     }
 

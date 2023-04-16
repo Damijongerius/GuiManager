@@ -3,11 +3,11 @@ package com.dami.guimanager;
 import com.dami.guimanager.Gui.Gui;
 import com.dami.guimanager.Gui.GuiBehavior;
 import com.dami.guimanager.Item.Items;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFactory;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,11 +26,26 @@ public final class GuiManager extends JavaPlugin implements Listener {
 
     }
 
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent e){
+        if(playerInventories.containsKey(e.getWhoClicked().getUniqueId())){
+            Gui gui = playerInventories.get(e.getWhoClicked().getUniqueId());
+            gui.click(e.getView().getTitle(),e);
+        }
+    }
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent e){
+        if(playerInventories.containsKey(e.getPlayer().getUniqueId())){
+            playerInventories.get(e.getPlayer().getUniqueId()).removePlayer((Player)e.getPlayer());
+            playerInventories.remove(e.getPlayer().getUniqueId());
+        }
+    }
+
     /**
      * all the inventories and static items here pls
      */
     public void onInitialize(List<Gui> inventoryList, Map<String, ItemStack> staticItems){
-        Items.staticItems = staticItems;
+        Items.definedItems = staticItems;
         inventories = inventoryList;
     }
 
@@ -42,7 +57,7 @@ public final class GuiManager extends JavaPlugin implements Listener {
     }
 
     public void addStaticItem(String name, ItemStack items){
-        Items.staticItems.put(name,items);
+        Items.definedItems.put(name,items);
     }
 
     public boolean openGuiFor(Player p, String prefix, String extendingInventory){

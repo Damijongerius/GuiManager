@@ -1,12 +1,11 @@
 package com.dami.guimanager.Gui;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Gui {
@@ -39,7 +38,7 @@ public class Gui {
     public Inventory getInventory(String inventory){
         for (Map.Entry<String, Inventory> set : this.inventories.entrySet()) {
             if(set.getKey().equals(inventory)){
-                return set.getValue();
+                return updateInventory(set.getKey(),set.getValue());
             }
         }
         Inventory inv = behavior.buildInventory(prefix, inventory);
@@ -58,6 +57,32 @@ public class Gui {
         if(players.isEmpty()){
             inventories.clear();
         }
+    }
+
+    public void click(String name, InventoryClickEvent e){
+        name = getInventoryName(name);
+        behavior.onInventoryClick(e,name);
+    }
+
+    public String getInventoryName(String name){
+        String newName = "";
+        for(int i = name.indexOf("|") + 1 ; i < name.length(); i++)
+        {
+            newName += name.charAt(i);
+        }
+
+        System.out.println(newName);
+        return newName;
+    }
+
+    public Inventory updateInventory(String  name, Inventory inv){
+       Inventory inventory = behavior.updateInventory(inv, name);
+       for (UUID uuid : players){
+           if(Objects.equals(Objects.requireNonNull(Bukkit.getPlayer(uuid)).getOpenInventory().getTitle(), name)){
+               Objects.requireNonNull(Bukkit.getPlayer(uuid)).openInventory(inventory);
+           }
+       }
+       return inventory;
     }
 
     public void setBehavior(GuiBehavior behavior){
