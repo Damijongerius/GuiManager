@@ -70,6 +70,15 @@ public final class GuiManager extends JavaPlugin implements Listener {
         return false;
     }
 
+    public Gui getGui(String name){
+        for(Gui gui: inventories){
+            if(gui.getPrefix().startsWith(name)){
+                return gui;
+            }
+        }
+        return null;
+    }
+
     public static GuiManager getInstance(){
         return instance;
     }

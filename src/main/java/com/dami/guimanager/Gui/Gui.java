@@ -31,7 +31,6 @@ public class Gui {
                 return;
             }
         });
-
         return contains.get();
     }
 
@@ -50,6 +49,12 @@ public class Gui {
         Inventory inv = getInventory(inventory);
         players.add(p.getUniqueId());
         p.openInventory(inv);
+    }
+
+    public void reOpenPlayer(Player p, String inventory, Inventory inv, String tinyBehavior, Object obj){
+        players.add(p.getUniqueId());
+        Inventory newInv = behavior.executeBehaviors(tinyBehavior, obj,inv);
+        p.openInventory(newInv);
     }
 
     public void removePlayer(Player p){
