@@ -90,6 +90,17 @@ public class Gui {
        return inventory;
     }
 
+    public static String getGuiName(String fullName){
+        String guiName = "";
+        for(int i = 0 ; i < fullName.indexOf("|") - 1; i++)
+        {
+            guiName += fullName.charAt(i);
+        }
+
+        System.out.println(guiName);
+        return guiName;
+    }
+
     public void setBehavior(GuiBehavior behavior){
         this.behavior = behavior;
     }

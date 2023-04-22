@@ -1,5 +1,6 @@
 package com.dami.guimanager;
 
+import com.dami.guimanager.ClickEvents.GuiWaiter;
 import com.dami.guimanager.Gui.Gui;
 import com.dami.guimanager.Gui.GuiBehavior;
 import com.dami.guimanager.Item.Items;
@@ -16,14 +17,16 @@ import java.util.*;
 
 public final class GuiManager extends JavaPlugin implements Listener {
     private static GuiManager instance;
-    private Items items = new Items();
+    private final GuiWaiter guiWaiter = new GuiWaiter(this);
+    private final Items items = new Items();
 
     private List<Gui> inventories = new ArrayList<>();
-    private Map<UUID,Gui> playerInventories =  new LinkedHashMap<>();
+    private final Map<UUID,Gui> playerInventories =  new LinkedHashMap<>();
     @Override
     public void onEnable() {
         instance = this;
-
+        getServer().getPluginManager().registerEvents(this, this);
+        getServer().getPluginManager().registerEvents(guiWaiter, this);
     }
 
     @EventHandler
@@ -77,6 +80,10 @@ public final class GuiManager extends JavaPlugin implements Listener {
             }
         }
         return null;
+    }
+
+    public GuiWaiter getWaiter(){
+        return guiWaiter;
     }
 
     public static GuiManager getInstance(){

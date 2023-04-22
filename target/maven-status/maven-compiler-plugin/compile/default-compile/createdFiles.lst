@@ -1,6 +1,9 @@
+com\dami\guimanager\ClickEvents\GuiWaiter.class
 com\dami\guimanager\Gui\Gui.class
+com\dami\guimanager\Gui\Wrapper.class
 com\dami\guimanager\Gui\GuiCreator.class
 com\dami\guimanager\GuiManager.class
+com\dami\guimanager\Gui\TinyBehavior.class
 com\dami\guimanager\Item\Items.class
 com\dami\guimanager\Configuration\ConfigurationManager.class
 com\dami\guimanager\Gui\GuiBehavior.class
